@@ -26,5 +26,5 @@ public class OrderEntity {
 	@Field(targetType = FieldType.DECIMAL128)
 	private BigDecimal total;
 
-	private List<OrderItem> items;
+	private List<OrderItem> itens;
 }

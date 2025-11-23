@@ -1,0 +1,20 @@
+meta {
+  name: List orders
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/customers/1/orders?page=0&pageSize=5
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 0
+  pageSize: 5
+}
+
+settings {
+  encodeUrl: true
+}

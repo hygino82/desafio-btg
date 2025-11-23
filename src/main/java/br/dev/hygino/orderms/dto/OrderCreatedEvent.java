@@ -3,7 +3,7 @@ package br.dev.hygino.orderms.dto;
 import java.util.List; 
 public record OrderCreatedEvent(
 		Long codigoPedido,
-		Long CodigoCliente,
+		Long codigoCliente,
 		List<OrderItemEvent> itens
 		) {
 
