@@ -9,14 +9,20 @@ import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 import br.dev.hygino.orderms.dto.OrderCreatedEvent;
+import br.dev.hygino.orderms.service.OrderService;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class OrderCreatedListener {
 
 	private final Logger logger = LoggerFactory.getLogger(OrderCreatedListener.class);
+	private final OrderService orderService;
 
 	@RabbitListener(queues = ORDER_CREATED_QUEUE)
 	public void listen(Message<OrderCreatedEvent> message) {
 		logger.info("Message consumed: {}" , message);
-	}
+		
+		orderService.save(message.getPayload());
+	}	
 }
