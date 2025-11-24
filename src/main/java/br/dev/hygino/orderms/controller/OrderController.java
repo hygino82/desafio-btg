@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 public class OrderController {
@@ -36,14 +38,10 @@ public class OrderController {
 
         logger.info("Página do cliente {}", customerId);
 
-        if (!content.isEmpty()) {
-            logger.info(content.getFirst().orderId().toString());
-        } else {
-            logger.error("Nenhum pedido encontrado para o cliente {}", customerId);
-        }
-
+        var totalOnOrders = orderService.findTotalOnOrdersByCustomerId(customerId);
 
         return ResponseEntity.ok(new ApiResponse<OrderResponse>(
+                Map.of("totalOnOrders", totalOnOrders),
                 pageResponse.getContent(),
                 PaginationResponse.fromPage(pageResponse)));
     }
