@@ -1,8 +1,12 @@
 package br.dev.hygino.orderms.controller;
 
+import br.dev.hygino.orderms.dto.ApiResponse;
+import br.dev.hygino.orderms.dto.OrderResponse;
+import br.dev.hygino.orderms.dto.PaginationResponse;
+import br.dev.hygino.orderms.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.spi.LoggerFactoryBinder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.dev.hygino.orderms.dto.ApiResponse;
-import br.dev.hygino.orderms.dto.OrderResponse;
-import br.dev.hygino.orderms.dto.PaginationResponse;
-import br.dev.hygino.orderms.service.OrderService;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor

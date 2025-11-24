@@ -11,12 +11,12 @@ public class RabbitMqConfig {
 	public static final String ORDER_CREATED_QUEUE = "ntg-pactual-order-created";
 
 	@Bean
-	Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
+	public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
 		return new Jackson2JsonMessageConverter();
 	}
 
 	@Bean
-	Declarable orderCreatedQueue() {
+	public Declarable orderCreatedQueue() {
 		return new Queue(ORDER_CREATED_QUEUE);
 	}
 }
