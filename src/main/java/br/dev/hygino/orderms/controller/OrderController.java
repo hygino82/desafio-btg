@@ -4,7 +4,6 @@ import br.dev.hygino.orderms.dto.ApiResponse;
 import br.dev.hygino.orderms.dto.OrderResponse;
 import br.dev.hygino.orderms.dto.PaginationResponse;
 import br.dev.hygino.orderms.service.OrderService;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,12 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
 public class OrderController {
 
     private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @GetMapping("customers/{customerId}/orders")
     public ResponseEntity<ApiResponse<OrderResponse>> listOrders(@PathVariable Long customerId,

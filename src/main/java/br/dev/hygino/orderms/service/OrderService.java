@@ -1,12 +1,10 @@
 package br.dev.hygino.orderms.service;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
-
-import java.math.BigDecimal;
-import java.util.List;
-
+import br.dev.hygino.orderms.dto.OrderCreatedEvent;
+import br.dev.hygino.orderms.dto.OrderResponse;
+import br.dev.hygino.orderms.entity.OrderEntity;
+import br.dev.hygino.orderms.entity.OrderItem;
+import br.dev.hygino.orderms.repository.OrderRepository;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,18 +12,21 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
-import br.dev.hygino.orderms.dto.OrderCreatedEvent;
-import br.dev.hygino.orderms.dto.OrderResponse;
-import br.dev.hygino.orderms.entity.OrderEntity;
-import br.dev.hygino.orderms.entity.OrderItem;
-import br.dev.hygino.orderms.repository.OrderRepository;
-import lombok.RequiredArgsConstructor;
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Service
-@RequiredArgsConstructor
+
 public class OrderService {
     private final OrderRepository orderRepository;
     private final MongoTemplate mongoTemplate;
+
+    public OrderService(OrderRepository orderRepository, MongoTemplate mongoTemplate) {
+        this.orderRepository = orderRepository;
+        this.mongoTemplate = mongoTemplate;
+    }
 
     public void save(OrderCreatedEvent event) {
         OrderEntity entity = new OrderEntity();
